@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "B站关注自动分组",
+  "version": "1.0.0",
+  "description": "新关注的UP主自动归类到指定分组：先按名称/签名/认证判断，无法判断时分析最近投稿内容。",
+  "permissions": ["alarms", "storage", "cookies"],
+  "host_permissions": ["*://*.bilibili.com/*"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "B站关注自动分组",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.bilibili.com/*"],
+      "js": ["content/interceptor.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["*://*.bilibili.com/*"],
+      "js": ["content/bridge.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

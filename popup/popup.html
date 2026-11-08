@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header>
+    <h1>B站关注自动分组</h1>
+    <div class="status-dot" id="statusDot"></div>
+  </header>
+
+  <section class="card">
+    <div class="row">
+      <label class="switch-label">
+        <input type="checkbox" id="enabled" />
+        <span>自动分组</span>
+      </label>
+      <span class="hint" id="stateText"></span>
+    </div>
+
+    <div class="row">
+      <label for="interval">定时检查</label>
+      <select id="interval">
+        <option value="1">每1分钟</option>
+        <option value="5" selected>每5分钟</option>
+        <option value="10">每10分钟</option>
+        <option value="30">每30分钟</option>
+        <option value="60">每60分钟</option>
+      </select>
+    </div>
+
+    <div class="row">
+      <label for="unclear">无法判定时</label>
+      <select id="unclear">
+        <option value="其他与个人账号">放入「其他与个人账号」</option>
+        <option value="default">留在默认分组</option>
+      </select>
+    </div>
+  </section>
+
+  <section class="card stats">
+    <div><span class="num" id="baselineCount">-</span><span class="lbl">基线关注</span></div>
+    <div><span class="num" id="processedCount">-</span><span class="lbl">已自动分组</span></div>
+    <div><span class="num" id="lastCheck">-</span><span class="lbl">上次检查</span></div>
+  </section>
+
+  <section class="card actions">
+    <button id="sweepNow" class="primary">立即检查新关注</button>
+    <button id="resetBaseline">重建基线</button>
+  </section>
+
+  <section class="card log">
+    <h2>最近动态</h2>
+    <ul id="logList">
+      <li class="empty">暂无记录</li>
+    </ul>
+  </section>
+
+  <footer>
+    新关注的UP主会立即自动归类；定时检查兜底。规则：名称/签名/认证 → 最近投稿分析。
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
